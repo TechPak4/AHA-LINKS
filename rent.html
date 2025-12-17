@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent a Car - AHA LINKS</title>
+    <style>
+        :root {
+            --primary-blue: #010127;
+            --accent-gold: #FFC300;
+            --background-light: #f4f7f6;
+            --white: #ffffff;
+            --text-grey: #666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--background-light);
+            color: #333;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 { margin: 0; font-size: 1.5em; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: bold; }
+
+        /* --- LAYOUT CONTAINER --- */
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            padding: 30px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* --- SIDEBAR FILTERS --- */
+        .sidebar {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            height: fit-content;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .sidebar h3 { border-bottom: 2px solid var(--accent-gold); padding-bottom: 10px; margin-top: 0; }
+        .filter-group { margin-bottom: 20px; }
+        .filter-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .filter-group select, .filter-group input { 
+            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; 
+        }
+
+        /* --- CAR GRID --- */
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .car-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .car-info { padding: 20px; }
+        .car-info h3 { margin: 0 0 10px 0; color: var(--primary-blue); }
+        
+        .specs {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: var(--text-grey);
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .price-tag {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #a02f31;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .rent-btn {
+            display: block;
+            text-align: center;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .rent-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+        }
+
+        /* Responsive Mobile Fix */
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { display: none; } /* Hide filters on mobile for simplicity */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AHA LINKS <span style="font-size: 0.6em; color: var(--accent-gold);">FLEET</span></h1>
+        <nav>
+            <a href="index.html">Home</a>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Filters</h3>
+            <div class="filter-group">
+                <label>Car Type</label>
+                <select>
+                    <option>All Types</option>
+                    <option>Sedan</option>
+                    <option>SUV</option>
+                    <option>Hatchback</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Price Range (PKR)</label>
+                <input type="range" min="5000" max="50000" step="1000">
+            </div>
+            <div class="filter-group">
+                <label>Transmission</label>
+                <input type="checkbox"> Automatic<br>
+                <input type="checkbox"> Manual
+            </div>
+        </aside>
+
+        <main class="car-grid">
+            
+            <div class="car-card">
+                <img src="https://cdn.rnudah.com/image_hd/plain/8befc4bb4b5ee048feafee7fdaca44ff-2956590946427274604.jpg" class="car-image" alt="Honda Civic">
+                <div class="car-info">
+                    <h3>Honda Civic RS</h3>
+                    <div class="specs">
+                        <span>👤 5 Seats</span>
+                        <span>⛽ Petrol</span>
+                        <span>⚙️ Auto</span>
+                    </div>
+                    <span class="price-tag">12,000 PKR / day</span>
+                    <a href="#" class="rent-btn">Rent Now</a>
+                </div>
+            </div>
+
+            <div class="car-card">
+                <img src="https://picture1.goo-net.com/090/0901241/J/0901241A30250424W00102.jpg" class="car-image" alt="Suzuki Alto">
+                <div class="car-info">
+                    <h3>Suzuki Alto VXL</h3>
+                    <div class="specs">
+                        <span>👤 4 Seats</span>
+                        <span>⛽ Petrol</span>
+                        <span>⚙️ Manual</span>
+                    </div>
+                    <span class="price-tag">7,000 PKR / day</span>
+                    <a href="#" class="rent-btn">Rent Now</a>
+                </div>
+            </div>
+
+            <div class="car-card">
+                <img src="https://suzukipakistan.com/Media/Used-Cars/Product/13446052837.JPG" class="car-image" alt="Suzuki Cultus">
+                <div class="car-info">
+                    <h3>Suzuki Cultus AGS</h3>
+                    <div class="specs">
+                        <span>👤 5 Seats</span>
+                        <span>⛽ Petrol</span>
+                        <span>⚙️ Auto</span>
+                    </div>
+                    <span class="price-tag">10,000 PKR / day</span>
+                    <a href="#" class="rent-btn">Rent Now</a>
+                </div>
+            </div>
+
+            <div class="car-card">
+                <img src="https://paultan.org/image/2017/03/Honda-BR-V-Malaysia-Drive-1.jpg" class="car-image" alt="BRV">
+                <div class="car-info">
+                    <h3>Honda BR-V</h3>
+                    <div class="specs">
+                        <span>👤 7 Seats</span>
+                        <span>⛽ Petrol</span>
+                        <span>⚙️ Auto</span>
+                    </div>
+                    <span class="price-tag">15,000 PKR / day</span>
+                    <a href="#" class="rent-btn">Rent Now</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer style="background: var(--primary-blue); color: white; text-align: center; padding: 20px; margin-top: 40px;">
+        <p>&copy; 2025 AHA LINKS Fleet Marketplace</p>
+    </footer>
+
+</body>
+</html>
