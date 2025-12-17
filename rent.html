@@ -35,7 +35,6 @@
 
         header h1 { margin: 0; font-size: 1.5em; }
         nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: bold; }
-        nav a:hover { color: var(--accent-gold); }
 
         /* --- LAYOUT CONTAINER --- */
         .container {
@@ -57,28 +56,10 @@
         }
 
         .sidebar h3 { border-bottom: 2px solid var(--accent-gold); padding-bottom: 10px; margin-top: 0; }
-        .filter-group { margin-bottom: 25px; }
-        .filter-group label.group-title { display: block; margin-bottom: 12px; font-weight: 600; color: var(--primary-blue); }
-        
-        .filter-group select, .filter-group input[type="range"] { 
+        .filter-group { margin-bottom: 20px; }
+        .filter-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .filter-group select, .filter-group input { 
             width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; 
-        }
-
-        /* NEW: Checkbox Alignment Styles */
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            font-size: 0.95em;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin: 0;
-            cursor: pointer;
         }
 
         /* --- CAR GRID --- */
@@ -150,7 +131,7 @@
         /* Responsive Mobile Fix */
         @media (max-width: 900px) {
             .container { grid-template-columns: 1fr; }
-            .sidebar { display: none; } 
+            .sidebar { display: none; } /* Hide filters on mobile for simplicity */
         }
     </style>
 </head>
@@ -160,15 +141,13 @@
         <h1>AHA LINKS <span style="font-size: 0.6em; color: var(--accent-gold);">FLEET</span></h1>
         <nav>
             <a href="index.html">Home</a>
-        </nav>
     </header>
 
     <div class="container">
         <aside class="sidebar">
             <h3>Filters</h3>
-            
             <div class="filter-group">
-                <label class="group-title">Car Type</label>
+                <label>Car Type</label>
                 <select>
                     <option>All Types</option>
                     <option>Sedan</option>
@@ -176,24 +155,14 @@
                     <option>Hatchback</option>
                 </select>
             </div>
-
             <div class="filter-group">
-                <label class="group-title">Price Range (PKR)</label>
+                <label>Price Range (PKR)</label>
                 <input type="range" min="5000" max="50000" step="1000">
             </div>
-
             <div class="filter-group">
-                <label class="group-title">Transmission</label>
-                
-                <label class="checkbox-item">
-                    <input type="checkbox"> 
-                    <span>Automatic</span>
-                </label>
-                
-                <label class="checkbox-item">
-                    <input type="checkbox"> 
-                    <span>Manual</span>
-                </label>
+                <label>Transmission</label>
+                <input type="checkbox"> Automatic<br>
+                <input type="checkbox"> Manual
             </div>
         </aside>
 
@@ -209,7 +178,7 @@
                         <span>⚙️ Auto</span>
                     </div>
                     <span class="price-tag">12,000 PKR / day</span>
-                    <a href="#" class="rent-btn">Rent Now</a>
+                    <a href="details.html" class="rent-btn">Rent Now</a>
                 </div>
             </div>
 
@@ -258,10 +227,8 @@
         </main>
     </div>
 
-    <footer>
-        <div style="background: var(--primary-blue); color: white; text-align: center; padding: 20px; margin-top: 40px;">
-            <p>&copy; 2025 AHA LINKS Fleet Marketplace</p>
-        </div>
+    <footer style="background: var(--primary-blue); color: white; text-align: center; padding: 20px; margin-top: 40px;">
+        <p>&copy; 2025 AHA LINKS Fleet Marketplace</p>
     </footer>
 
 </body>
