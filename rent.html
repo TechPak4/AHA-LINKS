@@ -58,8 +58,31 @@
         .sidebar h3 { border-bottom: 2px solid var(--accent-gold); padding-bottom: 10px; margin-top: 0; }
         .filter-group { margin-bottom: 20px; }
         .filter-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .filter-group select, .filter-group input { 
-            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; 
+        
+        /* Updated this to NOT affect checkboxes */
+        .filter-group select, 
+        .filter-group input:not([type="checkbox"]) { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 6px; 
+            box-sizing: border-box;
+        }
+
+        /* NEW: Styles for checkbox alignment */
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-weight: normal !important; /* Makes options look distinct from group label */
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
         }
 
         /* --- CAR GRID --- */
@@ -128,10 +151,9 @@
             color: var(--primary-blue);
         }
 
-        /* Responsive Mobile Fix */
         @media (max-width: 900px) {
             .container { grid-template-columns: 1fr; }
-            .sidebar { display: none; } /* Hide filters on mobile for simplicity */
+            .sidebar { display: none; }
         }
     </style>
 </head>
@@ -141,6 +163,7 @@
         <h1>AHA LINKS <span style="font-size: 0.6em; color: var(--accent-gold);">FLEET</span></h1>
         <nav>
             <a href="index.html">Home</a>
+        </nav>
     </header>
 
     <div class="container">
@@ -159,15 +182,21 @@
                 <label>Price Range (PKR)</label>
                 <input type="range" min="5000" max="50000" step="1000">
             </div>
+
             <div class="filter-group">
                 <label>Transmission</label>
-                <input type="checkbox"> Automatic<br>
-                <input type="checkbox"> Manual
+                
+                <label class="checkbox-item">
+                    <input type="checkbox"> <span>Automatic</span>
+                </label>
+                
+                <label class="checkbox-item">
+                    <input type="checkbox"> <span>Manual</span>
+                </label>
             </div>
         </aside>
 
         <main class="car-grid">
-            
             <div class="car-card">
                 <img src="https://cdn.rnudah.com/image_hd/plain/8befc4bb4b5ee048feafee7fdaca44ff-2956590946427274604.jpg" class="car-image" alt="Honda Civic">
                 <div class="car-info">
@@ -192,7 +221,7 @@
                         <span>⚙️ Manual</span>
                     </div>
                     <span class="price-tag">7,000 PKR / day</span>
-                    <a href="#" class="rent-btn">Rent Now</a>
+                    <a href="details.html" class="rent-btn">Rent Now</a>
                 </div>
             </div>
 
@@ -206,7 +235,7 @@
                         <span>⚙️ Auto</span>
                     </div>
                     <span class="price-tag">10,000 PKR / day</span>
-                    <a href="#" class="rent-btn">Rent Now</a>
+                    <a href="details.html" class="rent-btn">Rent Now</a>
                 </div>
             </div>
 
@@ -220,10 +249,9 @@
                         <span>⚙️ Auto</span>
                     </div>
                     <span class="price-tag">15,000 PKR / day</span>
-                    <a href="#" class="rent-btn">Rent Now</a>
+                    <a href="details.html" class="rent-btn">Rent Now</a>
                 </div>
             </div>
-
         </main>
     </div>
 
