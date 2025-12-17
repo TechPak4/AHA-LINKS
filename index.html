@@ -1,517 +1,430 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AHA LINKS - Car Marketplace</title>
-
     
-
     <style>
-
         /* Define your color variables */
-
         :root {
-
-            --primary-blue: #010127;    /* Deep, rich navy for main elements (Updated!) */
-
-            --accent-gold: #FFC300;     /* Bright gold for call-to-action */
-
+            --primary-blue: #010127;    
+            --accent-gold: #FFC300;     
             --text-dark: #333;
-
             --background-light: #f9f9f9;
-
             --white: #ffffff;
-
         }
 
+        /* --- PRELOADER STYLES --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--primary-blue); /* Match your theme */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000; /* Stays above the header */
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
 
+        .loader-wrapper {
+            text-align: center;
+        }
 
-        /* General Body and Typography */
+        .loader-logo {
+            width: 200px; /* Adjust size */
+            margin-bottom: 25px;
+            display: block;
+            border-radius: 8px;
+            animation: pulse 2s infinite ease-in-out;
+        }
 
+        /* Circular progress ring */
+        .loader-ring {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--accent-gold);
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.03); opacity: 1; }
+        }
+
+        /* Class to trigger fade out */
+        .hide-loader {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* --- REST OF YOUR ORIGINAL CSS --- */
         body {
-
             font-family: 'Arial', sans-serif;
-
             margin: 0;
-
             padding: 0;
-
             background-color: var(--background-light);
-
             color: var(--text-dark);
-
             line-height: 1.6;
-
         }
-
-
-
-        /* Header and Navigation (The Shopify Top Bar) */
 
         header {
-
             background-color: var(--primary-blue);
-
             color: var(--white);
-
             padding: 20px 40px;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
         }
-
-
 
         header h1 {
-
             margin: 0;
-
             font-size: 1.8em;
-
             letter-spacing: 1px;
-
         }
-
-
 
         nav a {
-
             color: var(--white);
-
             text-decoration: none;
-
             margin-left: 20px;
-
             font-weight: bold;
-
             transition: color 0.3s;
-
         }
-
-
 
         nav a:hover {
-
             color: var(--accent-gold);
-
         }
-
-
-
-        /* Main Content and Sections */
 
         main {
-
             padding: 20px 40px;
-
-            max-width: 1200px; /* Center content like a shopify store */
-
+            max-width: 1200px; 
             margin: 0 auto;
-
         }
-
-
-
-        /* Search Form Section (The Hero Area) */
 
         #search-form {
-
             background-color: var(--white);
-
             padding: 30px;
-
             border-radius: 8px;
-
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
             margin-bottom: 40px;
-
         }
-
-
 
         #search-form h2 {
-
-            color: var(--primary-blue); /* Updated! */
-
+            color: var(--primary-blue); 
             text-align: center;
-
             margin-top: 0;
-
         }
-
-
 
         #search-form form {
-
             display: grid;
-
-            grid-template-columns: repeat(4, 1fr); /* Four columns for inputs and button */
-
+            grid-template-columns: repeat(4, 1fr); 
             gap: 15px;
-
             align-items: end;
-
         }
-
         
-
         #search-form label {
-
             display: block;
-
             font-weight: bold;
-
             margin-bottom: 5px;
-
-            color: var(--primary-blue); /* Updated! */
-
+            color: var(--primary-blue); 
         }
-
-
 
         #search-form input[type="text"], 
-
         #search-form input[type="date"] {
-
             width: 100%;
-
             padding: 12px;
-
             border: 1px solid #ddd;
-
             border-radius: 4px;
-
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
-
+            box-sizing: border-box; 
         }
-
-
 
         #search-form button {
-
             background-color: var(--accent-gold);
-
-            color: var(--primary-blue); /* Updated! */
-
+            color: var(--primary-blue); 
             border: none;
-
             padding: 12px 20px;
-
             border-radius: 4px;
-
             font-size: 1em;
-
             font-weight: bold;
-
             cursor: pointer;
-
             transition: background-color 0.3s;
-
         }
-
-
 
         #search-form button:hover {
-
-            background-color: #fdd835; /* Slightly lighter gold on hover */
-
+            background-color: #fdd835; 
         }
-
-
-
-        /* Featured Cars Section (The Product Grid) */
 
         #featured-cars h2 {
-
             text-align: center;
-
             color: var(--text-dark);
-
             margin-bottom: 30px;
-
-            border-bottom: 2px solid var(--accent-gold); /* Gold underline accent */
-
+            border-bottom: 2px solid var(--accent-gold); 
             padding-bottom: 10px;
-
         }
-
-
 
         .car-grid {
-
             display: grid;
-
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 25px;
-
         }
-
         
-
         .car-listing {
-
             background-color: var(--white);
-
             border-radius: 8px;
-
             overflow: hidden;
-
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-
             transition: transform 0.3s, box-shadow 0.3s;
-
             text-align: center;
-
             padding: 20px;
-
         }
-
-
 
         .car-listing:hover {
-
             transform: translateY(-5px);
-
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-
         }
-
-
 
         .car-listing h3 {
-
-            color: var(--primary-blue); /* Updated! */
-
+            color: var(--primary-blue); 
             margin-top: 0;
-
             font-size: 1.4em;
-
         }
-
-
 
         .car-listing p {
-
             font-size: 0.9em;
-
             color: #666;
-
             margin: 5px 0;
-
         }
-
-
 
         .car-listing a {
-
             display: inline-block;
-
-            background-color: var(--primary-blue); /* Updated! */
-
+            background-color: var(--primary-blue); 
             color: var(--white);
-
             padding: 10px 15px;
-
             text-decoration: none;
-
             border-radius: 4px;
-
             margin-top: 15px;
-
             font-weight: bold;
-
             transition: background-color 0.3s;
-
         }
-
-
 
         .car-listing a:hover {
-
             background-color: var(--accent-gold);
-
-            color: var(--primary-blue); /* Updated! */
-
+            color: var(--primary-blue); 
         }
-
-
-
-        /* Footer */
 
         footer {
-
             background-color: var(--text-dark);
-
             color: var(--white);
-
             text-align: center;
-
             padding: 20px 0;
-
             margin-top: 50px;
-
             font-size: 0.85em;
-
         }
-
     </style>
-
 </head>
-
 <body>
 
+<div id="preloader">
+    <div class="loader-wrapper">
+        <div class="glow-container">
+            <div class="glow-left"></div>
+            <div class="glow-right"></div>
+        </div>
+        <img src="https://raw.githubusercontent.com/TechPak4/AHA-LINKS/main/aha-removebg-preview.png" alt="AHA LINKS" class="loader-logo">
+    </div>
+</div>
 
+<style>
+    #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        transition: opacity 1.2s ease;
+        overflow: hidden;
+    }
+
+    .loader-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* CONTAINER FOR THE TWO GLOWS */
+    .glow-container {
+        position: absolute;
+        width: 120vw;
+        height: 120vw;
+        display: flex;
+        animation: glowBreathe 3s infinite ease-in-out 0.8s;
+        transform: scale(0); /* Start small for pop animation */
+        animation-fill-mode: forwards;
+    }
+
+    /* YELLOW GLOW (LEFT) */
+    .glow-left {
+        flex: 1;
+        background: radial-gradient(circle at right, rgba(255, 195, 0, 0.7) 0%, rgba(255, 195, 0, 0) 70%);
+        filter: blur(60px);
+    }
+
+    /* BLUE GLOW (RIGHT) */
+    .glow-right {
+        flex: 1;
+        background: radial-gradient(circle at left, rgba(0, 102, 255, 0.7) 0%, rgba(0, 102, 255, 0) 70%);
+        filter: blur(60px);
+    }
+
+    .loader-logo {
+        width: 450px; 
+        max-width: 85%;
+        z-index: 10;
+        /* Mixed shadow to match both sides */
+        filter: drop-shadow(-10px 0 15px rgba(255, 195, 0, 0.5)) 
+                drop-shadow(10px 0 15px rgba(0, 102, 255, 0.5));
+        
+        animation: popOut 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        opacity: 0; 
+    }
+
+    /* ANIMATIONS */
+    @keyframes popOut {
+        0% { transform: scale(0.3); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Glow Pop-in and Breathe */
+    @keyframes glowBreathe {
+        0% { transform: scale(0.5); opacity: 0; }
+        20% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    .fade-away {
+        opacity: 0;
+        visibility: hidden;
+    }
+</style>
+
+<script>
+    window.addEventListener("load", function() {
+        const loader = document.getElementById("preloader");
+        setTimeout(() => {
+            loader.classList.add("fade-away");
+            setTimeout(() => {
+                loader.style.display = "none";
+            }, 1200); 
+        }, 3000); 
+    });
+</script>
 
     <header>
-
         <h1>AHA LINKS</h1>
-
         <nav>
-
             <a href="index.html">Rent a Car</a>
-
             <a href="list_car.html">List Your Car</a>
-
             <a href="#">Login / Sign Up</a>
-
         </nav>
-
     </header>
 
-
-
     <main>
-
         <section id="search-form">
-
             <h2>Find Your Next Trip Car</h2>
-
             <form action="/search-results" method="GET">
-
                 <div class="form-group">
-
                     <label for="location">Pickup Location:</label>
-
                     <input type="text" id="location" name="location" placeholder="City or Airport" required>
-
                 </div>
-
                 
-
                 <div class="form-group">
-
                     <label for="pickup-date">Pickup Date:</label>
-
                     <input type="date" id="pickup-date" name="pickup-date" required>
-
                 </div>
-
                 
-
                 <div class="form-group">
-
                     <label for="return-date">Return Date:</label>
-
                     <input type="date" id="return-date" name="return-date" required>
-
                 </div>
-
                 
-
                 <div class="form-group">
-
                     <button type="submit">Search Cars</button>
-
                 </div>
-
             </form>
-
         </section>
-
         
-
         <section id="featured-cars">
-
             <h2>Explore Our Fleet</h2>
-
             <div class="car-grid">
-
                 <div class="car-listing">
-
                     <img src="https://cdn.rnudah.com/image_hd/plain/8befc4bb4b5ee048feafee7fdaca44ff-2956590946427274604.jpg" alt="Honda Civic" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px; background-color: #ddd;">
-
                     <h3>Honda Civic - Daily Rate: 12,000PKR</h3>
-
                     <p>Location: Johar Town,Lahore.</p>
-
                     <p>Seats: 5 | Model Year: 2022 | **Total Price:12,600PKR (incl. 5% fee)**</p>
-
                     <a href="#">View Details and Rent</a>
-
                 </div>
-
                 
-
                 <div class="car-listing">
-
                     <img src="https://picture1.goo-net.com/090/0901241/J/0901241A30250424W00102.jpg" alt="Suzuki Alto" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px; background-color: #ddd;">
-
                     <h3>Suzuki Alto - Daily Rate:7,000 PKR</h3>
-
                     <p>Location: Garhi Shahu,Lahore.</p>
-
                     <p>Seats: 5 | Model Year: 2018 | **Total Price: 7,350 PKR (incl. 5% fee)**</p>
-
                     <a href="#">View Details and Rent</a>
-
                 </div>
-
-
 
                 <div class="car-listing">
-
                     <img src="https://suzukipakistan.com/Media/Used-Cars/Product/13446052837.JPG" alt="Suzuki Cultus" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px; background-color: #ddd;">
-
                     <h3>Suzuki Cultus - Daily Rate: 10,000</h3>
-
                     <p>Location:G-9/1 Islamabad.</p>
-
                     <p>Seats: 5 | Model Year: 2024 | **Total Price: 10,500 PKR(incl. 5% fee)**</p>
-
                     <a href="#">View Details and Rent</a>
-
                 </div>
-
             </div>
-
         </section>
-
     </main>
 
-
-
     <footer>
-
         <p>&copy; 2025 AHA LINKS. Your Trusted Rental Partner.</p>
-
         <p>Platform Fee: 5% | Powered by TECHPAK.</p>
-
     </footer>
 
-
+    <script>
+        // Use the window load event to ensure the page is ready
+        window.addEventListener("load", function() {
+            const loader = document.getElementById("preloader");
+            
+            // Wait 5 seconds before hiding
+            setTimeout(() => {
+                loader.classList.add("hide-loader");
+                
+                // Remove from display completely after fade transition finishes (0.8s)
+                setTimeout(() => {
+                    loader.style.display = "none";
+                }, 800);
+                
+            }, 5000); // 5000ms = 5 seconds
+        });
+    </script>
 
 </body>
-
 </html>
